@@ -7,6 +7,10 @@ height = parseFloat(scale * naturalHeight);
 strWidth = "" + width;
 strHeight = "" + height;
 
+textX = 55;
+textY1 = 55;
+textDY = 40;
+
 bgColor1 = "#ea6486";
 bgColor2 = "#cccccc";
 bgColor3 = "#87c26c";
@@ -86,24 +90,38 @@ getAlien = function() {
     }
 };
 
+getTextSVG = function(text, yIndex) {
+    textY = textY1 + yIndex * textDY;
+    t = svgTextTemplate.replace("X--GOES--HERE", textX);
+    t = t.replace("Y--GOES--HERE", textY);
+    t = t.replace("TEXT--GOES--HERE", text);
+    return t;
+}
+
 getSVG = function() {
     svg = svgTemplate;
     color = getColor();
     alienSVG = getAlien();
+
+    textSVG = "";
     text1 = getById("text1").value;
+    textSVG += getTextSVG(text1, 0);
+
     text2 = getById("text2").value;
+    textSVG += getTextSVG(text2, 1);
+
     text3 = getById("text3").value;
+    textSVG += getTextSVG(text3, 2);
+
     text4 = getById("text4").value;
+    textSVG += getTextSVG(text4, 3);
+
     text5 = getById("text5").value;
-    text6 = getById("text6").value;
+    textSVG += getTextSVG(text5, 4);
+
+    svg = svg.replace("TEXT--GOES--HERE",textSVG);
     svg = svg.replace("FILL--GOES--HERE",color);
     svg = svg.replace("ALIEN--GOES--HERE",alienSVG);
-    svg = svg.replace("TEXT1--GOES--HERE",text1);
-    svg = svg.replace("TEXT2--GOES--HERE",text2);
-    svg = svg.replace("TEXT3--GOES--HERE",text3);
-    svg = svg.replace("TEXT4--GOES--HERE",text4);
-    svg = svg.replace("TEXT5--GOES--HERE",text5);
-    svg = svg.replace("TEXT6--GOES--HERE",text6);
     svg = svg.replace("HEIGHT--GOES--HERE",strHeight);
     svg = svg.replace("WIDTH--GOES--HERE",strWidth);
     svg = svg.replace("SCALE--FACTOR--GOES--HERE",strScale);
@@ -204,6 +222,16 @@ init = function() {
     }, false);
 };
 
+svgTextTemplate = '\
+    <text \
+        x="X--GOES--HERE" \
+        y="Y--GOES--HERE" \
+        fill="#000000" \
+        stroke="none" \
+        font-size="28pt" \
+        font-family="Arial, Helvetica, sans-serif">TEXT--GOES--HERE</text> \
+';
+
 svgTemplate = '\
 <svg xmlns="http://www.w3.org/2000/svg" \
     height="HEIGHT--GOES--HERE" \
@@ -222,61 +250,8 @@ svgTemplate = '\
 \
     <g transform="translate(204,367)"> ALIEN--GOES--HERE </g> \
 \
-    <text \
-        x="55" \
-        y="55" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT1--GOES--HERE</text> \
+TEXT--GOES--HERE \
 \
-    <text \
-        x="55" \
-        y="95" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT2--GOES--HERE</text> \
-\
-    <text \
-        x="55" \
-        y="135" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT3--GOES--HERE</text> \
-\
-    <text \
-        x="55" \
-        y="175" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT4--GOES--HERE</text> \
-\
-    <text \
-        x="55" \
-        y="215" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT5--GOES--HERE</text> \
-\
-    <text \
-        x="55" \
-        y="255" \
-        fill="#000000" \
-        stroke="none" \
-        font-size="28pt" \
-        font-family="Arial, Helvetica, sans-serif">TEXT6--GOES--HERE</text> \
-\
-    <text \
-        x="12" \
-        y="780" \
-        fill="#222222" \
-        stroke="none" \
-        font-size="18pt" \
-        font-family="Arial, Helvetica, sans-serif">anarres.github.io/AnAlienYelling</text> \
 <!-- \
     <rect \
         x="399" \
