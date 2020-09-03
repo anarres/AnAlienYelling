@@ -1,5 +1,5 @@
 naturalWidth = 800;
-naturalHeight = 800;
+naturalHeight = 720;
 scale = 0.5
 strScale = "" + scale;
 width = parseInt(scale * naturalWidth);
@@ -7,9 +7,9 @@ height = parseFloat(scale * naturalHeight);
 strWidth = "" + width;
 strHeight = "" + height;
 
-textX = 55;
-textY1 = 55;
-textDY = 40;
+textX = 50;
+textY1 = 70;
+textDY = 45;
 
 bgColor1 = "#ea6486";
 bgColor2 = "#cccccc";
@@ -116,8 +116,8 @@ getSVG = function() {
     text4 = getById("text4").value;
     textSVG += getTextSVG(text4, 3);
 
-    text5 = getById("text5").value;
-    textSVG += getTextSVG(text5, 4);
+    //text5 = getById("text5").value;
+    //textSVG += getTextSVG(text5, 4);
 
     svg = svg.replace("TEXT--GOES--HERE",textSVG);
     svg = svg.replace("FILL--GOES--HERE",color);
@@ -133,9 +133,9 @@ getDescription = function() {
     t2 = getById("text2").value;
     t3 = getById("text3").value;
     t4 = getById("text4").value;
-    t5 = getById("text5").value;
-    t6 = getById("text6").value;
-    text = t1 + " " + t2 + " " + t3 + " " + t4 + " " + t5 + " " + t6;
+    //t5 = getById("text5").value;
+    //t6 = getById("text6").value;
+    text = t1 + " " + t2 + " " + t3 + " " + t4; // + " " + t5 + " " + t6;
     template = 'Image description: A cartoon says: TEXT--GOES--HERE';
     desc = template.replace("TEXT--GOES--HERE",text);
     return desc;
@@ -248,9 +248,17 @@ svgTemplate = '\
         fill="FILL--GOES--HERE" \
         stroke="none"/> \
 \
-    <g transform="translate(204,367)"> ALIEN--GOES--HERE </g> \
+    <g transform="translate(204,280)"> ALIEN--GOES--HERE </g> \
 \
 TEXT--GOES--HERE \
+\
+    <text \
+        x="12" \
+        y="704" \
+        fill="#ffffff" \
+        stroke="none" \
+        font-size="18pt" \
+        font-family="Arial, Helvetica, sans-serif">anarres.github.io/AnAlienYelling</text> \
 \
 <!-- \
     <rect \
